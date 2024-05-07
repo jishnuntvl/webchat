@@ -4,14 +4,18 @@
 <div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
 	<div class="card-header">
 		<div class="input-group">
-			<input type="text" placeholder="Search..." name="" class="form-control search">
-			<div class="input-group-prepend">
-				<a href="{% url 'logout' %}">
-					<span class="input-group-text search_btn"><i class="fas fa-search" ></i></span>
-				</a>
+			<input type="text" placeholder="@{{me.username}}" name="" class="form-control search">
+			<div class="input-group-prepend">	
+					<span class="input-group-text search_btn" onclick="redirectTologout()"><i class="fas fa-search" ></i></span>	
 			</div>
 		</div>
 	</div>
+	<script>
+		function redirectTologout() {
+			window.location.href = "{% url 'logout' %}";
+		}
+	</script>
+	
 	<div class="card-body contacts_body">
 		<ui class="contacts">
 		{% for user in users %}
@@ -22,7 +26,7 @@
 					<span class="online_icon"></span>
 				</div>
 				<div class="user_info">
-					<a href="{% url 'chat' %}"><span>{{user.name}}</span></a>
+					<a href="{% url 'chat' me.username user.user.username %}"><span>{{user.name}}</span></a>
 					<p>{{user.name}} is online</p>
 				</div>
 			</div>

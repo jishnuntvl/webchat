@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 
 # Customer
@@ -11,3 +12,11 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return self.name
+    
+class Message(models.Model):
+    value=models.CharField(max_length=100)
+    date=models.DateTimeField(default=datetime.now,blank=True)
+    sender=models.ForeignKey(User,on_delete=models.CASCADE,related_name='sender')
+    receiver=models.ForeignKey(User,on_delete=models.CASCADE,related_name='receiver')
+    def __str__(self):
+        return self.value

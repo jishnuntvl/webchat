@@ -8,7 +8,7 @@ from . import views
 urlpatterns = [
     path('',views.login,name='login'),
     path('home/<user>',views.home,name='home'),
-    path('chat/',views.chat,name='chat'),
+    path('chat/<me>/<frnd>',views.chat,name='chat'),
     path('logout/',views.logout,name='logout'),
 ]
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

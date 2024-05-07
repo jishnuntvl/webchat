@@ -1,0 +1,25 @@
+<div class="card-body msg_card_body">
+    {% for msg in msg_obj %}
+    {% if msg.sender == friend %}
+    <div class="d-flex justify-content-start mb-4">
+        <div class="img_cont_msg">
+            <img src="{{ frnd_obj.image.url }}" class="rounded-circle user_img_msg">
+        </div>
+        <div class="msg_cotainer">
+            {{msg.value}}
+            <span class="msg_time">{{msg.date}}</span>
+        </div>
+    </div>
+    {% else %}
+    <div class="d-flex justify-content-end mb-4">
+        <div class="msg_cotainer_send">
+            {{msg.value}}
+            <span class="msg_time_send">{{msg.date}}</span>
+        </div>
+        <div class="img_cont_msg">
+    <img src="{{ user_obj.image.url }}" class="rounded-circle user_img_msg">
+        </div>
+    </div>
+   {% endif %}
+    {% endfor %}
+</div>
