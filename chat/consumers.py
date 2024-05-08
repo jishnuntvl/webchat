@@ -21,23 +21,25 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = text_data_json["message"]
         username = text_data_json["username"]
         frienduname = text_data_json["frienduname"]
-
-        await self.save_message(message, username, frienduname)
-
+        message_instance=await self.save_message(message, username, frienduname)
+        message_time = message_instance.date.strftime("%H:%M")
         await self.channel_layer.group_send(
             self.roomGroupName,{
                 "type" : "sendMessage" ,
-                "message" : message , 
-                "username" : username ,
-                "frienduname":frienduname
+                "message" : message_instance.value , 
+                "username" : message_instance.sender.username ,
+                "frienduname":message_instance.receiver.username,
+                "time":message_time
             })
     async def sendMessage(self , event) : 
         message = event["message"]
         username = event["username"]
-        await self.send(text_data = json.dumps({"message":message ,"username":username}))  
+        frienduname=event["frienduname"]
+        time=event["time"]
+        await self.send(text_data = json.dumps({"message":message ,"username":username,"frienduname":frienduname,"time":time}))  
 
     @sync_to_async
     def save_message(self,message, username, frienduname):
         sender=User.objects.get(username=username)
         receiver=User.objects.get(username=frienduname)
-        Message.objects.create(value=message,sender=sender,receiver=receiver)     
+        return (Message.objects.create(value=message,sender=sender,receiver=receiver))     
