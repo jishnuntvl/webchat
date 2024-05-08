@@ -1,14 +1,31 @@
 {% extends 'mainhead.html' %}
 {% block content %}
 
+<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+<div class="action_menu">
+	<ul>
+		<li><i class="fas fa-user-circle"></i> View profile</li>
+		<li><i class="fas fa-users"></i> Add to close friends</li>
+		<li><i class="fas fa-plus"></i> Add to group</li>
+		<li onclick="redirectTologout()"><i class="fas fa-logout"></i> LogOut</li>
+	</ul>
+</div>
+<div class="img_cont">
+	<img src="{{profile.image.url}}" class="rounded-circle user_img"><p>__@{{profile.user.username}}</p>
+	<span class="online_icon"></span>
+</div>
+
+
 <div class="col-md-4 col-xl-3 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
 	<div class="card-header">
 		<div class="input-group">
 			<input type="text" placeholder="@{{me.username}}" name="" class="form-control search">
 			<div class="input-group-prepend">	
-					<span class="input-group-text search_btn" onclick="redirectTologout()"><i class="fas fa-search" ></i></span>	
+					<span class="input-group-text search_btn"><i class="fas fa-search" ></i></span>	
 			</div>
+			
 		</div>
+		
 	</div>
 	<script>
 		function redirectTologout() {

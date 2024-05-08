@@ -1,6 +1,20 @@
 {% extends 'mainhead.html' %}
 {% block content %}
 
+<span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
+<div class="action_menu">
+	<ul>
+		<li><i class="fas fa-user-circle"></i> View profile</li>
+		<li><i class="fas fa-users"></i> Add to close friends</li>
+		<li><i class="fas fa-plus"></i> Add to group</li>
+		<li onclick="redirectTologout()"><i class="fas fa-logout"></i> LogOut</li>
+	</ul>
+</div>
+<div class="img_cont">
+	<img src="{{user_obj.image.url}}" class="rounded-circle user_img"><p>__@{{user.username}}</p>
+	<span class="online_icon"></span>
+</div>
+
 <div class="col-md-8 col-xl-6 chat">
 	<div class="card">
 		<div class="card-header msg_head">

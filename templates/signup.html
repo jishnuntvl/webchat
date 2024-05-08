@@ -1,0 +1,31 @@
+{% extends 'login.html' %}
+{% block content %}
+<div class="text-center mt-4 name">
+    SignUp
+</div>
+<form class="p-3 mt-3" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <input type="text" name="name" id="name" placeholder="Name">
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <input type="text" name="phone" id="phone" placeholder="Phone">
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-user"></span>
+        <input type="text" name="username" id="userName" placeholder="Username">
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="fas fa-key"></span>
+        <input type="password" name="password" id="pwd" placeholder="Password">
+    </div>
+    <div class="form-field d-flex align-items-center">
+        <span class="far fa-image"></span>
+        <input type="file" name="image" id="image" accept="image/*">
+    </div>
+
+    <button type="submit" class="btn mt-3">SignUp</button>
+</form>
+{% endblock content %}

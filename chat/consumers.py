@@ -1,6 +1,6 @@
 import json
-from channels.generic.websocket import AsyncWebsocketConsumer
-from django.contrib.auth.models import User
+from channels.generic.websocket import AsyncWebsocketConsumer # type: ignore
+from django.contrib.auth.models import User # type: ignore
 from .models import Message
 from asgiref.sync import sync_to_async # type: ignore
 class ChatConsumer(AsyncWebsocketConsumer):
@@ -14,7 +14,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def disconnect(self , close_code):
         await self.channel_layer.group_discard(
             self.roomGroupName , 
-            self.channel_layer 
+            self.channel_name 
         )
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
