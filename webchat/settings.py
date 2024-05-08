@@ -34,6 +34,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    # add django channels
+    'channels' ,
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chat'
 ]
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
+ASGI_APPLICATION='webchat.asgi.application'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

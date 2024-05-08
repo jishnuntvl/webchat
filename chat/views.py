@@ -23,6 +23,7 @@ def chat(request,me,frnd):
     user_obj=Profile.objects.get(user=user)
     frnd_obj=Profile.objects.get(user=friend)
     msg_obj=Message.objects.filter(Q(sender=user,receiver=friend) | Q(sender=friend,receiver=user)).order_by("date")
+    print(msg_obj[0].date.time())
     context={
         'user':user,
         'friend':friend,
@@ -37,3 +38,10 @@ def home(request,user):
     obj=Profile.objects.all().exclude(user=userobj)
     context={'users':obj,'me':userobj}
     return render(request,'home.html',context)
+
+"""def msgsnd(request,me,frnd):
+    msg=request.POST['message']
+    user=User.objects.get(username=me)
+    friend=User.objects.get(username=frnd)
+    Message.objects.create(value=msg,sender=user,receiver=friend).save()
+    return redirect('/chat/'+me+"/"+frnd)"""
